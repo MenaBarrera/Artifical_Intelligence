@@ -5,32 +5,36 @@
  *      Author: manupc
  */
 
-#include "RandomBot.h"
+#include "MenaBarrBot.h"
 
 #include <string>
 #include <cstdlib>
 #include <iostream>
 using namespace std;
 
-RandomBot::RandomBot() {
+MenaBarrBot::MenaBarrBot() {
 	// Inicializar las variables necesarias para ejecutar la partida
 	srand(time(0));
 
 }
 
-RandomBot::~RandomBot() {
+MenaBarrBot::~MenaBarrBot() {
 	// Liberar los recursos reservados (memoria, ficheros, etc.)
 }
 
-void RandomBot::initialize() {
+void MenaBarrBot::initialize() {
 	// Inicializar el bot antes de jugar una partida
 }
 
-string RandomBot::getName() {
-	return "RandomBot"; // Sustituir por el nombre del bot
+string MenaBarrBot::getName() {
+	return "MenaBarrBot"; // Sustituir por el nombre del bot
 }
 
-Move RandomBot::nextMove(const vector<Move> &adversary, const GameState &state) {
+int MenaBarrBot::evaluoTablero(const GameState &estado){
+	return 
+}
+
+Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state) {
 
 
 	Player turno= this->getPlayer();
@@ -45,7 +49,7 @@ Move RandomBot::nextMove(const vector<Move> &adversary, const GameState &state) 
 	// cerr<< "Lo que quiero mostrar"<<endl;
 
 
-	// OJO: Recordatorio. El nombre del bot y de la clase deben coincidir.
+	// OJO: . El nombre del bot y de la clase deben coincidir.
 	// En caso contrario, el bot no podrá participar en la competición.
 	// Se deberá sustituir el nombre MiBot como nombre de la clase por otro
 	// seleccionado por el alumno. Se deberá actualizar también el nombre
