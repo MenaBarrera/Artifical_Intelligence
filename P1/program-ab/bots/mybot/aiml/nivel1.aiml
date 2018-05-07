@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern> Cargar nivel 1 </pattern>
+  <template> Cargando... <set name="topic"> nivel1 </set></template>
+</category>
+
+
+<topic name="nivel1">
+
+<category>
+  <pattern> comenzar juego </pattern>
+  <template>
+    <think>
+      <set name="frutas">fresa manzana naranja kiwi mandarina pina mango melocoton higo ciruela pera platano coco aguacate nuez cereza </set>
+      <set name="colores">rojo amarillo verde naranja morado marron </set>
+      <set name="tam">pequeno mediano grande </set>
+      <set name="sab">acido semiacido dulce</set>
+
+      <set name="total"><srai> COUNT <get name="frutas"/> </srai></set>
+      <set name="indice"><srai>RANDOM <get name="total"/></srai></set>
+      <set name="elegido"><srai>SELECTITEM <get name="indice"/> IN <get name="frutas"/></srai></set>
+
+            <set name="color"><map name="color"><get name="elegido"/></map></set>
+            <set name="sabor"><map name="sabor"><get name="elegido"/></map></set>
+            <set name="tamanio"><map name="tam"><get name="elegido"/></map></set>
+            <set name="vitaminaA"><map name="vitaminaA"><get name="elegido"/></map></set>
+            <set name="vitaminaB"><map name="vitaminaB"><get name="elegido"/></map></set>
+            <set name="vitaminaC"><map name="vitaminaC"><get name="elegido"/></map></set>
+
+    </think>
+
+  </template>
+</category>
+
+<category>
+  <pattern> a quien has elegido </pattern>
+  <template> <get name="elegido"/> ha sido mi fruta
+   color : <get name="color"/>
+   sabor : <get name="sabor"/>
+   tamanio : <get name="tamanio"/>
+   vitaminaA : <get name="vitaminaA"/>
+   vitaminaB : <get name="vitaminaB"/>
+   vitaminaC : <get name="vitaminaC"/>
+
+</template>
+</category>
+
+<!-- PREGUNTAS RELACIONADAS CON EL TAMAÑO -->
+
+
+
+<category>
+  <pattern> ^  grande  </pattern>
+  <template>
+    <condition name="tamanio">
+      <li value="grande"> si </li>
+      <li> no </li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern> ^  pequen+  </pattern>
+  <template>
+    <condition name="tamanio">
+      <li value="pequeno"> si </li>
+      <li> no </li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern> ^  median+  </pattern>
+  <template>
+    <condition name="tamanio">
+      <li value="mediano"> si </li>
+      <li> no </li>
+    </condition>
+  </template>
+</category>
+
+
+<!-- PREGUNTAS RELACIONADAS CON EL SABOR -->
+
+
+<category>
+  <pattern> ^ es dulce  </pattern>
+  <template>
+    <condition name="sabor">
+      <li value="dulce"> si </li>
+      <li> no </li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern> ^ es acid+  </pattern>
+  <template>
+    <condition name="sabor">
+      <li value="acido"> si </li>
+      <li> no </li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern> ^  es semiacid+ </pattern>
+  <template>
+    <condition name="sabor">
+      <li value="semiacido"> si </li>
+      <li> no </li>
+    </condition>
+  </template>
+</category>
+
+<category>
+  <pattern> ^  es neutr+ </pattern>
+  <template>
+    <condition name="sabor">
+      <li value="neutro"> si </li>
+      <li> no </li>
+    </condition>
+  </template>
+</category>
+
+<!-- PREGUNTAS RELACIONADAS CON EL COLOR -->
+
+<category>
+  <pattern> ^ es roj+  </pattern>
+  <template>
+    <think>
+      <set var="pos">
+        <srai> FINDITEM rojo IN <get name="color"/> </srai>
+      </set>
+    </think>
+    <condition var="pos">
+      <li value="0"> no </li>
+      <li> si </li>
+    </condition>
+  </template>
+</category>
+
+
+<category>
+  <pattern> ^ amarill+ </pattern>
+  <template>
+    <think>
+      <set var="pos">
+        <srai> FINDITEM amarillo IN <get name="color"/> </srai>
+      </set>
+    </think>
+    <condition var="pos">
+      <li value="0"> no </li>
+      <li> si </li>
+    </condition>
+  </template>
+</category>
+
+
+<category>
+  <pattern> ^ verde  </pattern>
+  <template>
+    <think>
+      <set var="pos">
+        <srai> FINDITEM verde IN <get name="color"/> </srai>
+      </set>
+    </think>
+    <condition var="pos">
+      <li value="0"> no </li>
+      <li> si </li>
+    </condition>
+  </template>
+</category>
+
+
+<category>
+  <pattern> ^ naranja  </pattern>
+  <template>
+    <think>
+      <set var="pos">
+        <srai> FINDITEM naranja IN <get name="color"/> </srai>
+      </set>
+    </think>
+    <condition var="pos">
+      <li value="0"> no </li>
+      <li> si </li>
+    </condition>
+  </template>
+</category>
+
+
+<category>
+  <pattern> ^ morad+ </pattern>
+  <template>
+    <think>
+      <set var="pos">
+        <srai> FINDITEM morado IN <get name="color"/> </srai>
+      </set>
+    </think>
+    <condition var="pos">
+      <li value="0"> no </li>
+      <li> si </li>
+    </condition>
+  </template>
+</category>
+
+
+<category>
+  <pattern> ^ marron  </pattern>
+  <template>
+    <think>
+      <set var="pos">
+        <srai> FINDITEM marron IN <get name="color"/> </srai>
+      </set>
+    </think>
+    <condition var="pos">q
+      <li value="0"> no </li>
+      <li> si </li>
+    </condition>
+  </template>
+</category>
+
+
+<!-- PREGUNTAS RELACIONADAS CON LAS VITAMINAS -->
+
+<category>
+  <pattern> ^ vitamina a ^</pattern>
+  <template> <get name="vitaminaA"/> </template>
+</category>
+
+<category>
+  <pattern> ^ vitamina b ^</pattern>
+  <template> <get name="vitaminaB"/></template>
+</category>
+
+<category>
+  <pattern> ^ vitamina c ^</pattern>
+  <template> <get name="vitaminaC"/></template>
+</category>
+
+
+<!-- RESOLVEDOR -->
+
+
+<category>
+  <pattern> es [el la] * </pattern>
+    <template>
+      <condition name="elegido">
+        <li>
+          <value><star/></value> Has acertado, muy bien, enhorabuena </li>
+
+        <li>
+          Has fallado, la fruta que habia pensado para esta partida era <get name="elegido"/>.
+        </li>
+      </condition>
+    </template>
+  </category>
+
+<category>
+  <pattern> La fruta en la que estabas pensando es [el la] *</pattern>
+    <template>
+      <condition name="elegido">
+        <li><value><star/></value>
+          Has acertado, muy bien, enhorabuena
+        </li>
+
+        <li> Has fallado, la fruta que habia pensado para esta partida era <get name="elegido"/> </li>
+
+      </condition>
+    </template>
+  </category>
+</topic>
+
+</aiml>

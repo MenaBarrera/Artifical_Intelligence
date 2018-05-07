@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!-- PREGUNTA 1 -->
+<category>
+  <pattern>como consigo superar la parte practica</pattern>
+  <template> Sacando mas de 5 en dicha parte</template>
+</category>
+
+<category>
+  <pattern> ^ supero ^ practica(s) </pattern>
+  <template><srai> COMO CONSIGO SUPERAR LA PARTE PRACTICA </srai></template>
+</category>
+
+<category>
+  <pattern> ^ apruebo ^ practica(s) </pattern>
+  <template><srai> COMO CONSIGO SUPERAR LA PARTE PRACTICA </srai></template>
+</category>
+
+<category>
+  <pattern> ^ aprobar ^ practica(s) </pattern>
+  <template><srai> COMO CONSIGO SUPERAR LA PARTE PRACTICA </srai></template>
+</category>
+
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<!-- PREGUNTA 2 -->
+
+<category>
+  <pattern> como se evalua en la convocatoria ordinaria </pattern>
+  <template> La media aritmetica entre practicas y teoria </template>
+</category>
+
+<category>
+  <pattern> ^ califica(n) ^ ordinaria </pattern>
+  <template><srai> COMO SE EVALUA EN LA CONVOCATORIA ORDINARIA </srai></template>
+</category>
+
+
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<!-- PREGUNTA 3 -->
+
+
+<category>
+  <pattern> hay examen de practicas en la convocatoria extraordinaria </pattern>
+  <template> En convocatoria extraordinaria no hay examen de practicas</template>
+</category>
+
+<category>
+  <pattern> ^ evalua(n) practica(s) ^ extraordinaria </pattern>
+  <template><srai> HAY EXAMEN DE PRACTICAS EN LA CONVOCATORIA EXTRAORDINARIA </srai></template>
+</category>
+
+<category>
+  <pattern> ^ examen ^ practica(s) ^ [extraordinaria julio] </pattern>
+  <template><srai> HAY EXAMEN DE PRACTICAS EN LA CONVOCATORIA EXTRAORDINARIA </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 4 -->
+
+<category>
+  <pattern> que pasa si no puedo asistir a clase regularmente </pattern>
+  <template> deberias pedir la evalucion unica final </template>
+</category>
+
+<category>
+  <pattern> ^ no ^ [voy asisto acudo] ^ a clase ^ [dia(s) regularmente]</pattern>
+  <template><srai> QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 5 -->
+<category>
+  <pattern> hay nota minima para aprobar </pattern>
+  <template>sacar un 5 con la suma de teoria y practicas</template>
+</category>
+
+<category>
+  <pattern> ^ minimo ^ para aprobar ^ </pattern>
+  <template><srai> HAY NOTA MINIMA PARA APROBAR </srai></template>
+</category>
+
+<category>
+  <pattern> ^ minima ^ para aprobar ^ </pattern>
+  <template><srai> HAY NOTA MINIMA PARA APROBAR </srai></template>
+</category>
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 6 -->
+<category>
+  <pattern> las practicas son obligatorias </pattern>
+  <template> si</template>
+</category>
+
+<category>
+  <pattern> ^ [ir asistir asistencia] ^ practica(s) ^  </pattern>
+  <template><srai> LAS PRACTICAS SON OBLIGATORIAS </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 7 -->
+<category>
+  <pattern> cuanto vale cada practica con respecto a la nota final </pattern>
+  <template> valen el 25 por ciento cada una </template>
+</category>
+
+<category>
+  <pattern> ^ cada ^ practica(s)</pattern>
+  <template><srai> CUANTO VALE CADA PRACTICA CON RESPECTO A LA NOTA FINAL </srai></template>
+</category>
+
+<category>
+  <pattern> ^ [peso valor puntua puntuacion] ^ (cada) practica </pattern>
+  <template><srai> CUANTO VALE CADA PRACTICA CON RESPECTO A LA NOTA FINAL </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 8-->
+<category>
+  <pattern> cuanto vale la participacion con respecto a la nota final </pattern>
+  <template> vale un 10 por ciento </template>
+</category>
+
+<category>
+  <pattern> ^ [participacion participar] ^ nota ^ </pattern>
+  <template><srai> CUANTO VALE LA PARTICIPACION CON RESPECTO A LA NOTA FINAL</srai></template>
+</category>
+
+
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 9-->
+<category>
+  <pattern> como se consiguen los puntos por participacion </pattern>
+  <template> yendo a clase y participando en el aula </template>
+</category>
+
+<category>
+  <pattern> ^ [puntos puntuacion nota] ^ [participacion]</pattern>
+  <template><srai> COMO SE CONSIGUEN LOS PUNTOS POR PARTICIPACION </srai></template>
+</category>
+
+
+
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 10-->
+<category>
+  <pattern> los trabajos son individuales </pattern>
+  <template> si son individuales </template>
+</category>
+
+<category>
+  <pattern>  ^ trabajo(s) ^ [solo individuales individual] </pattern>
+  <template><srai> LOS TRABAJOS SON INDIVIDUALES </srai></template>
+</category>
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 11 -->
+<category>
+  <pattern> se pueden hacer los trabajos en grupo </pattern>
+  <template> no ya que si lo haces suspenderas </template>
+</category>
+
+<category>
+  <pattern> ^ [hacer realizar] ^ [trabajos practicas] ^ [grupo parejas equipo personas] </pattern>
+  <template><srai> SE PUEDEN HACER LOS TRABAJOS EN GRUPO </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 12 -->
+<category>
+  <pattern> hay que entregar los ejercicios de las relaciones de problemas </pattern>
+  <template> no puesto que se evalua con el examen</template>
+</category>
+
+<category>
+  <pattern> ^ ejercicios ^ (relacion) ^ (relaciones) ^  (problema(s)) ^ </pattern>
+  <template><srai> HAY QUE ENTREGAR LOS EJERCICIOS DE LAS RELACIONES DE PROBLEMAS </srai></template>
+</category>
+
+<category>
+  <pattern> ^ ejercicios  </pattern>
+  <template><srai> HAY QUE ENTREGAR LOS EJERCICIOS DE LAS RELACIONES DE PROBLEMAS </srai></template>
+</category>
+
+<category>
+  <pattern> ^ ejercicios ^ (relacion) ^ </pattern>
+  <template><srai> HAY QUE ENTREGAR LOS EJERCICIOS DE LAS RELACIONES DE PROBLEMAS </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 13 -->
+<category>
+  <pattern> cuanto vale el primer examen de teoria </pattern>
+  <template> vale el 25 por ciento </template>
+</category>
+
+<category>
+  <pattern> ^ [vale puntua peso porcentaje] ^ primer examen ^ de teoria </pattern>
+  <template><srai> CUANTO VALE EL PRIMER EXAMEN DE TEORIA </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 14-->
+
+<category>
+  <pattern> puedo recuperar una practica o examen </pattern>
+  <template> si, en el examen ordinario, si no sale aprobada con los porcentajes </template>
+</category>
+
+<category>
+  <pattern> ^ [recuperar repetir] ^ (practica) ^ (examen)</pattern>
+  <template><srai> PUEDO RECUPERAR UNA PRACTICA O EXAMEN </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 15-->
+<category>
+  <pattern>que pasa si me copio de otro estudiante </pattern>
+  <template>Si te pillan, vas a suspender seguro </template>
+</category>
+
+<category>
+  <pattern> ^ [copio copiando(me) fijo fijandome] ^ [estudiante compañero alumno]</pattern>
+  <template><srai> QUE PASA SI ME COPIO DE OTRO ESTUDIANTE </srai></template>
+</category>
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 16-->
+<category>
+  <pattern> que pasa si me dejo copiar de otro estudiante </pattern>
+  <template>Si os pillan suspendeis ambos, for sure </template>
+</category>
+
+
+<category>
+  <pattern> ^ si me dejo copiar ^ </pattern>
+  <template><srai> QUE PASA SI ME DEJO COPIAR DE OTRO ESTUDIANTE </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 17 -->
+<category>
+  <pattern> y si suspendo en la convocatoria ordinaria </pattern>
+  <template>No pasa nada! aun te queda la extraordinaria </template>
+</category>
+
+<category>
+  <pattern> ^ [suspendo no\ apruebo] ^ [ordinaria junio]</pattern>
+  <template><srai> Y SI SUSPENDO EN LA CONVOCATORIA ORDINARIA </srai></template>
+</category>
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 18 -->
+<category>
+  <pattern> cuanto vale la practica y la teoria </pattern>
+  <template> valen el 50% cada una de ellas </template>
+</category>
+
+<category>
+  <pattern> ^ practica(s) ^ teoria </pattern>
+  <template><srai> CUANTO VALE LA PRACTICA Y LA TEORIA </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 19 -->
+<category>
+  <pattern>Cual es el horario de tutorias del profesor de practicas</pattern>
+  <template> Lunes de 10 a 13:30 y martes de 10 a 12:30</template>
+</category>
+
+<category>
+  <pattern> ^ [tutoria(s) despacho] ^ (profesor) ^ practica(s) </pattern>
+  <template><srai>CUAL ES EL HORARIO DE TUTORIAS DEL PROFESOR DE PRACTICAS </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 20 -->
+<category>
+  <pattern> se puede aprobar la parte practica de la asignatura si no presento una practica </pattern>
+  <template>si puesto que solo valen el 20% cada una  </template>
+</category>
+
+<category>
+  <pattern> ^ practica(s) ^ [presento entrego subo presentar entregar] ^ practica </pattern>
+  <template><srai> se puede aprobar la parte practica de la asignatura si no presento una practica </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 21 -->
+<category>
+  <pattern> Cual es la nota minima que tengo que obtener en cada parte para hacer media </pattern>
+  <template> Segun la guia de la asignatura no hay nota minima</template>
+</category>
+
+<category>
+  <pattern> ^ minim[o a] ^ media ^ </pattern>
+  <template><srai> Cual es la nota minima que tengo que obtener en cada parte para hacer media  </srai></template>
+</category>
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 22 -->
+<category>
+  <pattern> que puntuacion obtengo en la practica 1 si opto por defender el nivel 3 y no lo supero </pattern>
+  <template> La maxima nota a la que aspiras es al 6 sobre 10</template>
+</category>
+
+<category>
+  <pattern> ^ nivel 3 ^ </pattern>
+  <template><srai> que puntuacion obtengo en la practica 1 si opto por defender el nivel 3 y no lo supero </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 23 -->
+<category>
+  <pattern> puedo entregar la practica 1 sin hacer la tarea relatica al nivel 0 </pattern>
+  <template> no, por que es la llave para acceder a los siguientes niveles </template>
+</category>
+
+<category>
+  <pattern> ^ practica 1 ^ nivel 0 ^ </pattern>
+  <template><srai> uedo entregar la practica 1 sin hacer la tarea relatica al nivel 0 </srai></template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 24 -->
+<category>
+  <pattern> Que tengo que hacer si no puedo asistir a la sesion de practicas en la que me corresponder hacer la defensa de mi practica 1 </pattern>
+  <template>  Justificar la falta </template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 25 -->
+<category>
+  <pattern> Cuantas pruebas teoricas tendre a lo largo del curso </pattern>
+  <template> se haran dos pruebas en el apartado de teoria </template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 26 -->
+<category>
+  <pattern>que vale la primera prueba teorica </pattern>
+  <template> vale un 50% sobre 100% en teoria </template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 27 -->
+<category>
+  <pattern> En que consiste el examen de ejercicios </pattern>
+  <template> en ejercicios de la relacion de problemas </template>
+</category>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- PREGUNTA 28 -->
+<category>
+  <pattern>que deberia hacer si no estoy seguro de poder superar el nivel 3 de la practica 1  </pattern>
+  <template> Hacer el nivel 2 y asegurarte el 8 </template>
+</category>
+
+</aiml>
