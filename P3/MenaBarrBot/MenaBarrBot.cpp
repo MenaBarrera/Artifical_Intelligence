@@ -30,12 +30,27 @@ string MenaBarrBot::getName() {
 	return "MenaBarrBot"; // Sustituir por el nombre del bot
 }
 
-int MenaBarrBot::evaluoTablero(const GameState &estado){
-	return 
+int MenaBarrBot::evaluoTablero(const GameState &st){
+	Player j_actual = st.getCurrentPlayer();
+	Player oponente;
+
+	if (j_actual == J1)
+		oponente = J2;
+	else 
+		oponente = J1;
+
+	int suma = 0;
+
+	for(int i =0; i < 7 ; i++){
+		suma += st.getSeedsAt(j_actual,(Position) i);
+	}
+
+	return suma;
 }
 
 Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state) {
 
+	evaluoTablero(state);
 
 	Player turno= this->getPlayer();
 	long timeout= this->getTimeOut();

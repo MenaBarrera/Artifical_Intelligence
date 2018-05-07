@@ -42,7 +42,7 @@ private:
 	void setBadMoveState(Player j); // Establece el estado final donde el jugador j pierde por movimiento mal hecho
 
 public:
-
+	
 	// Construye un estado del juego, inicialmente no válido
 	GameState();
 

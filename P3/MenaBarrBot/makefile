@@ -1,8 +1,8 @@
 
 all:
-	g++ -oRandomBot *.cpp -I./ -lm -std=c++11
+	g++ -o MenaBarrBot *.cpp -I./ -lm -std=c++11
 
 
 clean:
-	rm RandomBot
+	rm MenaBarrBot
 

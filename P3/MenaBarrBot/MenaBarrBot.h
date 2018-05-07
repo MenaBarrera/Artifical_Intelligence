@@ -15,7 +15,7 @@ public:
 	MenaBarrBot();
 	~MenaBarrBot();
 
-
+	int evaluoTablero(const GameState & st);
 	void initialize();
 	string getName();
 	Move nextMove(const vector<Move> &adversary, const GameState &state);
