@@ -19,6 +19,7 @@ public:
 	void initialize();
 	string getName();
 	Move nextMove(const vector<Move> &adversary, const GameState &state);
+	Move Minimax(const GameState &st, int profundidad );
 
 
 

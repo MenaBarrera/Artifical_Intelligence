@@ -30,8 +30,7 @@ string MenaBarrBot::getName() {
 	return "MenaBarrBot"; // Sustituir por el nombre del bot
 }
 
-int MenaBarrBot::evaluoTablero(const GameState &st){
-	Player j_actual = st.getCurrentPlayer();
+int MenaBarrBot::evaluoTablero(const GameState &st, const Player & j_actual){
 	Player oponente;
 
 	if (j_actual == J1)
@@ -47,6 +46,43 @@ int MenaBarrBot::evaluoTablero(const GameState &st){
 
 	return suma;
 }
+
+Move Minimax(const GameState &estado, int limite, const Player & j, int & valor ){
+	Move mov = M_NONE;
+
+	if ( (limite > 0 || limite <= -1) && !estado.isFinalState()){
+		int valorSigmov;
+		Move sigMov;
+
+		if(estado.getCurrentPlayer() == j){   // estamos en un nodo max
+			valor = numeric_limits<int>::min();
+			
+			for(int i = 1; i <=7; i++){
+				GameState sigEstado = estado.simulateMove((Move)i);
+				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov)
+				if(valor < valorSigmov){
+					valor = valorSigmov;
+					mov = sigMov;
+				}
+			}
+		}
+		else{
+			valor = numeric_limits<int>::max();
+			
+			for(int i = 1; i <=7; i++){
+				GameState sigEstado = estado.simulateMove((Move)i);
+				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov)
+				if(valor > valorSigmov){
+					valor = valorSigmov;
+					mov = sigMov;
+				}
+			}
+		}
+	}
+	else{
+		valor = evaluoTablero(estado,j);
+	}
+}	
 
 Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state) {
 
