@@ -15,11 +15,11 @@ public:
 	MenaBarrBot();
 	~MenaBarrBot();
 
-	int evaluoTablero(const GameState & st);
+	int evaluoTablero(const GameState & st, const Player & j);
 	void initialize();
 	string getName();
 	Move nextMove(const vector<Move> &adversary, const GameState &state);
-	Move Minimax(const GameState &st, int profundidad );
+	Move Minimax(const GameState &estado, int limite, const Player & j, int & valor );
 
 
 

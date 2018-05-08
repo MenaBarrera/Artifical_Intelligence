@@ -30,25 +30,26 @@ string MenaBarrBot::getName() {
 	return "MenaBarrBot"; // Sustituir por el nombre del bot
 }
 
-int MenaBarrBot::evaluoTablero(const GameState &st, const Player & j_actual){
-	Player oponente;
+int MenaBarrBot::evaluoTablero(const GameState &st, const Player & jug){
+	int misSemillas , semillasContrario;
+	Player contrario = J1;
 
-	if (j_actual == J1)
-		oponente = J2;
-	else 
-		oponente = J1;
+	if(jug == J1)
+		contrario = J2;
+	
+	misSemillas = semillasContrario = 0;
 
-	int suma = 0;
-
-	for(int i =0; i < 7 ; i++){
-		suma += st.getSeedsAt(j_actual,(Position) i);
+	for(int i=0; i<=6; i++){
+		misSemillas += st.getSeedsAt(jug,(Position)i);
+		semillasContrario += st.getSeedsAt(contrario, (Position)i);
 	}
-
-	return suma;
+	return misSemillas -  semillasContrario;
 }
 
-Move Minimax(const GameState &estado, int limite, const Player & j, int & valor ){
-	Move mov = M_NONE;
+Move MenaBarrBot::Minimax(const GameState &estado, int limite, const Player & j, int & valor ){
+	Move mov;
+
+	3
 
 	if ( (limite > 0 || limite <= -1) && !estado.isFinalState()){
 		int valorSigmov;
@@ -57,10 +58,11 @@ Move Minimax(const GameState &estado, int limite, const Player & j, int & valor 
 		if(estado.getCurrentPlayer() == j){   // estamos en un nodo max
 			valor = numeric_limits<int>::min();
 			
-			for(int i = 1; i <=7; i++){
+			for(int i = 1; i < 7; i++){
 				GameState sigEstado = estado.simulateMove((Move)i);
-				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov)
+				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov);
 				if(valor < valorSigmov){
+					cerr << " eeeeee " <<endl;
 					valor = valorSigmov;
 					mov = sigMov;
 				}
@@ -69,9 +71,9 @@ Move Minimax(const GameState &estado, int limite, const Player & j, int & valor 
 		else{
 			valor = numeric_limits<int>::max();
 			
-			for(int i = 1; i <=7; i++){
+			for(int i = 1; i < 7; i++){
 				GameState sigEstado = estado.simulateMove((Move)i);
-				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov)
+				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov);
 				if(valor > valorSigmov){
 					valor = valorSigmov;
 					mov = sigMov;
@@ -82,16 +84,21 @@ Move Minimax(const GameState &estado, int limite, const Player & j, int & valor 
 	else{
 		valor = evaluoTablero(estado,j);
 	}
+	return mov;
 }	
 
 Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state) {
 
-	evaluoTablero(state);
+	//evaluoTablero(state);
 
 	Player turno= this->getPlayer();
 	long timeout= this->getTimeOut();
 
 	Move movimiento= M_NONE;
+
+	int v=0;
+	movimiento = Minimax(state,2,turno,v);
+
 
 	// Implementar aquí la selección de la acción a realizar
 
@@ -105,7 +112,7 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 	// Se deberá sustituir el nombre MiBot como nombre de la clase por otro
 	// seleccionado por el alumno. Se deberá actualizar también el nombre
 	// devuelto por el método getName() acordemente.
-
+/*
 	int available= 0; // Movimientos disponibles;
 
 	for (int i= 1; i<=6;i++) {
@@ -122,7 +129,7 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 		if (aux == n)
 			movimiento= (Move)i;
 	}
-
-
+	*/
 	return movimiento;
+	
 }
