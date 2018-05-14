@@ -10,6 +10,9 @@
 #include <string>
 #include <cstdlib>
 #include <iostream>
+#include <cassert>
+#include <limits>
+
 using namespace std;
 
 MenaBarrBot::MenaBarrBot() {
@@ -57,9 +60,15 @@ Move MenaBarrBot::Minimax(const GameState &estado, int limite, const Player & j,
 		if(estado.getCurrentPlayer() == j){   // estamos en un nodo max
 			valor = numeric_limits<int>::min();
 			
+			
 			for(int i = 1; i < 7; i++){
 				GameState sigEstado = estado.simulateMove((Move)i);
 				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov);
+				cerr << "estoy en nodo max " <<endl;
+				cerr << "valor " << valor <<endl;
+				cerr << "Valor sigMov " << valorSigmov << endl;
+				
+
 				if(valor < valorSigmov){
 					cerr << " eeeeee " <<endl;
 					valor = valorSigmov;
@@ -89,18 +98,39 @@ Move MenaBarrBot::Minimax(const GameState &estado, int limite, const Player & j,
 Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state) {
 
 	//evaluoTablero(state);
-
+	/*
 	GameState estado1;
-	estado1.piezas[][];
+	estado1.turno = J2; //con el que vayamos a calcular el tablero
 
-	assert(evaluoTablero(estado1,J1) == )
+	estado1.piezas[0][6]=1;
+	estado1.piezas[0][5]=1;
+	estado1.piezas[0][4]=1;
+	estado1.piezas[0][3]=1;
+	estado1.piezas[0][2]=1;
+	estado1.piezas[0][1]=1;
+	estado1.piezas[0][0]=1;
+
+	estado1.piezas[1][6]=1;
+	estado1.piezas[1][5]=0;
+	estado1.piezas[1][4]=1;
+	estado1.piezas[1][3]=1;
+	estado1.piezas[1][2]=0;
+	estado1.piezas[1][1]=0;
+	estado1.piezas[1][0]=1;
+
+	assert(evaluoTablero(estado1,J1) == 3);
+	cerr << "no he muerto" << endl;
+	*/
+
 
 	Player turno= this->getPlayer();
 	long timeout= this->getTimeOut();
 
 	Move movimiento= M_NONE;
 
-	//movimiento = Minimax(state,2,turno,v);
+	int v;
+
+	movimiento = Minimax(state,6,turno,v);
 
 
 	// Implementar aquí la selección de la acción a realizar
@@ -134,5 +164,7 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 	}
 	*/
 	return movimiento;
+	
+
 	
 }
