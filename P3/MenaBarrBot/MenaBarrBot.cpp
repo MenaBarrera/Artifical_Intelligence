@@ -64,15 +64,11 @@ Move MenaBarrBot::Minimax(const GameState &estado, int limite, const Player & j,
 			for(int i = 1; i < 7; i++){
 				GameState sigEstado = estado.simulateMove((Move)i);
 				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov);
-				cerr << "estoy en nodo max " <<endl;
-				cerr << "valor " << valor <<endl;
-				cerr << "Valor sigMov " << valorSigmov << endl;
 				
-
 				if(valor < valorSigmov){
 					cerr << " eeeeee " <<endl;
 					valor = valorSigmov;
-					mov = sigMov;
+					mov = (Move)i;
 				}
 			}
 		}
@@ -84,7 +80,7 @@ Move MenaBarrBot::Minimax(const GameState &estado, int limite, const Player & j,
 				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov);
 				if(valor > valorSigmov){
 					valor = valorSigmov;
-					mov = sigMov;
+					mov = (Move)i;
 				}
 			}
 		}
@@ -130,7 +126,7 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 
 	int v;
 
-	movimiento = Minimax(state,6,turno,v);
+	movimiento = Minimax(state,4,turno,v);
 
 
 	// Implementar aquí la selección de la acción a realizar
