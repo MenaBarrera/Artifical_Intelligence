@@ -1,8 +1,8 @@
 /*
- * ManuPCBot.cpp
+ * MenaBarrBot.cpp
  *
  *  Created on: 15 ene. 2018
- *      Author: manupc
+ *      Author: MenaBarr
  */
 
 #include "MenaBarrBot.h"
@@ -49,7 +49,6 @@ int MenaBarrBot::evaluoTablero(const GameState &st, const Player & jug){
 Move MenaBarrBot::Minimax(const GameState &estado, int limite, const Player & j, int & valor ){
 	Move mov;
 
-	3
 
 	if ( (limite > 0 || limite <= -1) && !estado.isFinalState()){
 		int valorSigmov;
@@ -91,13 +90,17 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 
 	//evaluoTablero(state);
 
+	GameState estado1;
+	estado1.piezas[][];
+
+	assert(evaluoTablero(estado1,J1) == )
+
 	Player turno= this->getPlayer();
 	long timeout= this->getTimeOut();
 
 	Move movimiento= M_NONE;
 
-	int v=0;
-	movimiento = Minimax(state,2,turno,v);
+	//movimiento = Minimax(state,2,turno,v);
 
 
 	// Implementar aquí la selección de la acción a realizar

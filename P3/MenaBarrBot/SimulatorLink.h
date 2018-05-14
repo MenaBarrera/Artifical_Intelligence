@@ -21,6 +21,8 @@ private:
 	GameState state; // Estado actual del juego
 public:
 
+	
+
 	// Constructor por defecto. Inicia el enlace del simulador
 	SimulatorLink();
 

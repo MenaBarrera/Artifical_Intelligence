@@ -25,7 +25,9 @@ enum Position {GRANERO= 0, P1=1, P2=2, P3=3, P4=4, P5=5, P6=6};
 // Clase para representar el estado del juego en un punto de la partida
 class GameState {
 
-private:
+
+public:
+//private:
 
 	friend class SimulatorLink;
 
@@ -41,7 +43,7 @@ private:
 
 	void setBadMoveState(Player j); // Establece el estado final donde el jugador j pierde por movimiento mal hecho
 
-public:
+//public:
 	
 	// Construye un estado del juego, inicialmente no válido
 	GameState();
