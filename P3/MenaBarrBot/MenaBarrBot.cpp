@@ -49,6 +49,17 @@ int MenaBarrBot::evaluoTablero(const GameState &st, const Player & jug){
 	return misSemillas -  semillasContrario;
 }
 
+
+
+/* Poda alpha-beta 
+	- se aplica sobre minimax
+	- no afecta al resultado del juego pero nos permite con ele mismo esfuerzo explorar un arbol de mayor profundidad
+	- alfa es el valor de la mejor opcion encontrada para el jugador max
+		Max evitara culquier movimiento que tenga un valor  u peor que alfa
+
+*/
+
+/*
 Move MenaBarrBot::Minimax(const GameState &estado, int limite, const Player & j, int & valor ){
 	Move mov;
 
@@ -91,33 +102,53 @@ Move MenaBarrBot::Minimax(const GameState &estado, int limite, const Player & j,
 	return mov;
 }	
 
+*/
+
+
+int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player & j, Move & mov, int alpha, int beta ){
+
+	int valor;
+
+	if ( (limite > 0 || limite <= -1) && !estado.isFinalState()){
+
+		if(estado.getCurrentPlayer() == j){   // estamos en un nodo max
+			
+			for(int i = 1; i < 7; i++){
+				GameState sigEstado = estado.simulateMove((Move)i);
+				valor = podaAlfaBeta(sigEstado,limite-1,j,mov,alpha,beta);
+
+				if(alpha < valor){
+					alpha = valor;
+					mov = (Move)i;
+				}
+				
+				if(beta <= alpha)
+					return beta;
+			}
+			return alpha;
+		}
+		else{
+			
+			for(int i = 1; i < 7; i++){
+				GameState sigEstado = estado.simulateMove((Move)i);
+				valor = podaAlfaBeta(sigEstado,limite-1,j,mov,alpha,beta);
+
+				if(beta > valor){
+					beta = valor;
+					mov  = (Move)i;
+				}
+				if ( beta <= alpha){ return alpha; }
+			}
+			return beta;
+		}
+	}
+	else{
+		return evaluoTablero(estado,j);
+	}
+	//return mov;
+}
+
 Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state) {
-
-	//evaluoTablero(state);
-	/*
-	GameState estado1;
-	estado1.turno = J2; //con el que vayamos a calcular el tablero
-
-	estado1.piezas[0][6]=1;
-	estado1.piezas[0][5]=1;
-	estado1.piezas[0][4]=1;
-	estado1.piezas[0][3]=1;
-	estado1.piezas[0][2]=1;
-	estado1.piezas[0][1]=1;
-	estado1.piezas[0][0]=1;
-
-	estado1.piezas[1][6]=1;
-	estado1.piezas[1][5]=0;
-	estado1.piezas[1][4]=1;
-	estado1.piezas[1][3]=1;
-	estado1.piezas[1][2]=0;
-	estado1.piezas[1][1]=0;
-	estado1.piezas[1][0]=1;
-
-	assert(evaluoTablero(estado1,J1) == 3);
-	cerr << "no he muerto" << endl;
-	*/
-
 
 	Player turno= this->getPlayer();
 	long timeout= this->getTimeOut();
@@ -125,8 +156,10 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 	Move movimiento= M_NONE;
 
 	int v;
+	int a = numeric_limits<int>::min();
+	int b = numeric_limits<int>::max();
 
-	movimiento = Minimax(state,4,turno,v);
+	v = podaAlfaBeta(state,4,turno,movimiento,a,b);
 
 
 	// Implementar aquí la selección de la acción a realizar
