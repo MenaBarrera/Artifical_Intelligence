@@ -111,7 +111,7 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 
 	if ( (limite > 0 || limite <= -1) && !estado.isFinalState()){
 
-		if(estado.getCurrentPlayer() == j){   // estamos en un nodo max
+		if(j == getPlayer() ){   // estamos en un nodo max
 			
 			for(int i = 1; i < 7; i++){
 				GameState sigEstado = estado.simulateMove((Move)i);
@@ -162,36 +162,6 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 	v = podaAlfaBeta(state,4,turno,movimiento,a,b);
 
 
-	// Implementar aquí la selección de la acción a realizar
-
-	// OJO: Recordatorio. NO USAR cin NI cout.
-	// Para salidas por consola (debug) utilizar cerr. Ejemplo:
-	// cerr<< "Lo que quiero mostrar"<<endl;
-
-
-	// OJO: . El nombre del bot y de la clase deben coincidir.
-	// En caso contrario, el bot no podrá participar en la competición.
-	// Se deberá sustituir el nombre MiBot como nombre de la clase por otro
-	// seleccionado por el alumno. Se deberá actualizar también el nombre
-	// devuelto por el método getName() acordemente.
-/*
-	int available= 0; // Movimientos disponibles;
-
-	for (int i= 1; i<=6;i++) {
-		if (state.getSeedsAt(turno, (Position) i) >0)
-			available++;
-	}
-
-	int n= 1+ (rand()%available);
-	int aux= 0;
-
-	for (int i= 1; i<=6 && movimiento == M_NONE; i++) {
-		if (state.getSeedsAt(turno, (Position) i) >0)
-			aux++;
-		if (aux == n)
-			movimiento= (Move)i;
-	}
-	*/
 	return movimiento;
 	
 
