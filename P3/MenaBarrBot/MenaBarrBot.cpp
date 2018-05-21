@@ -132,7 +132,7 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 		else{
 			
 			for(int i = 1; i < 7; i++){
-				//if(estado.getSeedsAt(j,(Position)i) > 0){
+				if(estado.getSeedsAt(j,(Position)i) > 0){
 					GameState sigEstado = estado.simulateMove((Move)i);
 					valor = podaAlfaBeta(sigEstado,limite-1,sigEstado.getCurrentPlayer(),mov,alpha,beta);
 
@@ -141,7 +141,7 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 						mov  = (Move)i;
 					}
 					if ( beta <= alpha){ return alpha; }
-				//}
+				}
 			}
 			return beta;
 		}
