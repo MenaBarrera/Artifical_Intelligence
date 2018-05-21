@@ -111,12 +111,12 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 
 	if ( (limite > 0 || limite <= -1) && !estado.isFinalState()){
 
-		if(j == estado.getCurrentPlayer() ){   // estamos en un nodo max
+		if(j == getPlayer() ){   // estamos en un nodo max
 			
 			for(int i = 1; i < 7; i++){
 				if(estado.getSeedsAt(j,(Position)i) > 0){
 					GameState sigEstado = estado.simulateMove((Move)i);
-					valor = podaAlfaBeta(sigEstado,limite-1,j,mov,alpha,beta);
+					valor = podaAlfaBeta(sigEstado,limite-1,sigEstado.getCurrentPlayer(),mov,alpha,beta);
 
 					if(alpha < valor){
 						alpha = valor;
@@ -132,16 +132,16 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 		else{
 			
 			for(int i = 1; i < 7; i++){
-				if(estado.getSeedsAt(j,(Position)i) > 0){
+				//if(estado.getSeedsAt(j,(Position)i) > 0){
 					GameState sigEstado = estado.simulateMove((Move)i);
-					valor = podaAlfaBeta(sigEstado,limite-1,j,mov,alpha,beta);
+					valor = podaAlfaBeta(sigEstado,limite-1,sigEstado.getCurrentPlayer(),mov,alpha,beta);
 
 					if(beta > valor){
 						beta = valor;
 						mov  = (Move)i;
 					}
 					if ( beta <= alpha){ return alpha; }
-				}
+				//}
 			}
 			return beta;
 		}
@@ -149,7 +149,6 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 	else{
 		return evaluoTablero(estado,j);
 	}
-	//return mov;
 }
 
 Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state) {
@@ -162,8 +161,10 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 	int v;
 	int a = numeric_limits<int>::min();
 	int b = numeric_limits<int>::max();
-
+	assert(getPlayer() == state.getCurrentPlayer());
 	v = podaAlfaBeta(state,4,turno,movimiento,a,b);
+	cerr << "MOV=" << movimiento << endl;
+	assert(state.getSeedsAt(getPlayer(), (Position)movimiento) > 0);
 
 
 	return movimiento;
