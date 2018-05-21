@@ -111,33 +111,37 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 
 	if ( (limite > 0 || limite <= -1) && !estado.isFinalState()){
 
-		if(j == getPlayer() ){   // estamos en un nodo max
+		if(j == estado.getCurrentPlayer() ){   // estamos en un nodo max
 			
 			for(int i = 1; i < 7; i++){
-				GameState sigEstado = estado.simulateMove((Move)i);
-				valor = podaAlfaBeta(sigEstado,limite-1,j,mov,alpha,beta);
+				if(estado.getSeedsAt(j,(Position)i) > 0){
+					GameState sigEstado = estado.simulateMove((Move)i);
+					valor = podaAlfaBeta(sigEstado,limite-1,j,mov,alpha,beta);
 
-				if(alpha < valor){
-					alpha = valor;
-					mov = (Move)i;
+					if(alpha < valor){
+						alpha = valor;
+						mov = (Move)i;
+					}
+					
+					if(beta <= alpha)
+						return beta;
 				}
-				
-				if(beta <= alpha)
-					return beta;
 			}
 			return alpha;
 		}
 		else{
 			
 			for(int i = 1; i < 7; i++){
-				GameState sigEstado = estado.simulateMove((Move)i);
-				valor = podaAlfaBeta(sigEstado,limite-1,j,mov,alpha,beta);
+				if(estado.getSeedsAt(j,(Position)i) > 0){
+					GameState sigEstado = estado.simulateMove((Move)i);
+					valor = podaAlfaBeta(sigEstado,limite-1,j,mov,alpha,beta);
 
-				if(beta > valor){
-					beta = valor;
-					mov  = (Move)i;
+					if(beta > valor){
+						beta = valor;
+						mov  = (Move)i;
+					}
+					if ( beta <= alpha){ return alpha; }
 				}
-				if ( beta <= alpha){ return alpha; }
 			}
 			return beta;
 		}
