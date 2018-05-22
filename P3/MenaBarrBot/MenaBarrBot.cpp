@@ -186,12 +186,12 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 }
 
 
-
-
 Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state) {
 
 	Player turno= state.getCurrentPlayer() ;
 	long timeout= this->getTimeOut();
+
+
 
 	Move movimiento= M_NONE;
 
@@ -202,6 +202,7 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 
 	v = podaAlfaBeta(state,16,turno,movimiento,a,b, 0);
 
+
 	// cerr << "MOV=" << movimiento << endl;
 	assert(state.getSeedsAt(getPlayer(), (Position)movimiento) > 0);
 
@@ -209,5 +210,8 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 	return movimiento;
 	
 
-	
+
+
+
+
 }
