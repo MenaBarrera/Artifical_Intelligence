@@ -20,7 +20,7 @@ public:
 	string getName();
 	Move nextMove(const vector<Move> &adversary, const GameState &state);
 	Move Minimax(const GameState &estado, int limite, const Player & j, int & valor );
-	int podaAlfaBeta(const GameState &estado, int limite, const Player & j, Move & mov, int alpha, int beta );
+	int podaAlfaBeta(const GameState &estado, int limite, const Player & j, Move & mov, int alpha, int beta, int);
 
 
 
