@@ -63,7 +63,14 @@ int MenaBarrBot::evaluoTablero(const GameState &st, const Player & jug){
 
 
 int peso(const GameState &st, const player& jugador){
+	int puntuacion;
+
+	if()
 	
+
+
+	if(st.isFinalState() && st.getWinner()==jugador )
+		puntuacion = numeric_limits<int>::max();
 }
 
 string desplazar(int nivel) {
