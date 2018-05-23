@@ -33,6 +33,18 @@ string MenaBarrBot::getName() {
 	return "MenaBarrBot"; // Sustituir por el nombre del bot
 }
 
+
+
+string mostrarJugador(const Player & p) {
+	if(p == J1) {
+		return "J1";
+	}
+	else {
+		return "J2";
+	}
+}
+
+
 int MenaBarrBot::evaluoTablero(const GameState &st, const Player & jug){
 	int misSemillas , semillasContrario;
 	Player contrario = J1;
@@ -50,67 +62,8 @@ int MenaBarrBot::evaluoTablero(const GameState &st, const Player & jug){
 }
 
 
-
-/* Poda alpha-beta 
-	- se aplica sobre minimax
-	- no afecta al resultado del juego pero nos permite con ele mismo esfuerzo explorar un arbol de mayor profundidad
-	- alfa es el valor de la mejor opcion encontrada para el jugador max
-		Max evitara culquier movimiento que tenga un valor  u peor que alfa
-
-*/
-
-/*
-Move MenaBarrBot::Minimax(const GameState &estado, int limite, const Player & j, int & valor ){
-	Move mov;
-
-
-	if ( (limite > 0 || limite <= -1) && !estado.isFinalState()){
-		int valorSigmov;
-		Move sigMov;
-
-		if(estado.getCurrentPlayer() == j){   // estamos en un nodo max
-			valor = numeric_limits<int>::min();
-			
-			
-			for(int i = 1; i < 7; i++){
-				GameState sigEstado = estado.simulateMove((Move)i);
-				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov);
-				
-				if(valor < valorSigmov){
-					// cerr << " eeeeee " <<endl;
-					valor = valorSigmov;
-					mov = (Move)i;
-				}
-			}
-		}
-		else{
-			valor = numeric_limits<int>::max();
-			
-			for(int i = 1; i < 7; i++){
-				GameState sigEstado = estado.simulateMove((Move)i);
-				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov);
-				if(valor > valorSigmov){
-					valor = valorSigmov;
-					mov = (Move)i;
-				}
-			}
-		}
-	}
-	else{
-		valor = evaluoTablero(estado,j);
-	}
-	return mov;
-}	
-
-*/
-
-string mostrarJugador(const Player & p) {
-	if(p == J1) {
-		return "J1";
-	}
-	else {
-		return "J2";
-	}
+int peso(const GameState &st, const player& jugador){
+	
 }
 
 string desplazar(int nivel) {
@@ -161,7 +114,7 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 			// cerr << desplazar(2-limite) << "MIN || <<" << endl;
 			for(int i = 1; i < 7; i++){
 				// cerr << desplazar(2-limite) << " Posicion=" << i << " tiene en granero " << (int)estado.getSeedsAt(j,(Position)i) << endl;
-				//if(estado.getSeedsAt(j,(Position)i) > 0){
+
 					// cerr << desplazar(2-limite) << " ACEPTADO" << endl;
 					GameState sigEstado = estado.simulateMove((Move)i);
 					valor = podaAlfaBeta(sigEstado,limite-1,sigEstado.getCurrentPlayer(),aux,alpha,beta, contador+1);
@@ -215,3 +168,47 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 
 
 }
+/*
+Move MenaBarrBot::Minimax(const GameState &estado, int limite, const Player & j, int & valor ){
+	Move mov;
+
+
+	if ( (limite > 0 || limite <= -1) && !estado.isFinalState()){
+		int valorSigmov;
+		Move sigMov;
+
+		if(estado.getCurrentPlayer() == j){   // estamos en un nodo max
+			valor = numeric_limits<int>::min();
+			
+			
+			for(int i = 1; i < 7; i++){
+				GameState sigEstado = estado.simulateMove((Move)i);
+				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov);
+				
+				if(valor < valorSigmov){
+					// cerr << " eeeeee " <<endl;
+					valor = valorSigmov;
+					mov = (Move)i;
+				}
+			}
+		}
+		else{
+			valor = numeric_limits<int>::max();
+			
+			for(int i = 1; i < 7; i++){
+				GameState sigEstado = estado.simulateMove((Move)i);
+				sigMov = Minimax(sigEstado,limite-1,j,valorSigmov);
+				if(valor > valorSigmov){
+					valor = valorSigmov;
+					mov = (Move)i;
+				}
+			}
+		}
+	}
+	else{
+		valor = evaluoTablero(estado,j);
+	}
+	return mov;
+}	
+
+*/
