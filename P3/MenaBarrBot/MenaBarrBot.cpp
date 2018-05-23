@@ -63,12 +63,10 @@ int MenaBarrBot::evaluoTablero(const GameState &st, const Player & jug){
 
 
 int peso(const GameState &st, const player& jugador){
-	int puntuacion;
+	int puntuacion_mia=0;
+	int puntuacion_oponente=0;
 
-	if()
 	
-
-
 	if(st.isFinalState() && st.getWinner()==jugador )
 		puntuacion = numeric_limits<int>::max();
 }
