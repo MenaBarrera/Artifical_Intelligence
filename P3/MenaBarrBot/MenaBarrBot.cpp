@@ -62,13 +62,21 @@ int MenaBarrBot::evaluoTablero(const GameState &st, const Player & jug){
 }
 
 
-int peso(const GameState &st, const player& jugador){
-	int puntuacion_mia=0;
-	int puntuacion_oponente=0;
+int MenaBarrBot::peso(const GameState &st){
+	Player player = this->getPlayer();
+	int score = st.getScore(player);
+	int opponent_score;
 
-	
-	if(st.isFinalState() && st.getWinner()==jugador )
-		puntuacion = numeric_limits<int>::max();
+	if (player == Player::J1)
+		opponent_score = st.getScore(Player::J2);
+	else
+		opponent_score = st.getScore(Player::J1);
+
+	int opponent_win_short_by = 24 - opponent_score;
+
+	int value = score - opponent_score + opponent_win_short_by;
+
+	return value;
 }
 
 string desplazar(int nivel) {
@@ -139,7 +147,8 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 		}
 	}
 	else{
-		return evaluoTablero(estado,this->getPlayer());
+		//return evaluoTablero(estado,this->getPlayer());
+		return peso(estado);
 	}
 }
 
@@ -147,7 +156,7 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state) {
 
 	Player turno= state.getCurrentPlayer() ;
-	long timeout= this->getTimeOut();
+	//long timeout= this->getTimeOut();
 
 
 
