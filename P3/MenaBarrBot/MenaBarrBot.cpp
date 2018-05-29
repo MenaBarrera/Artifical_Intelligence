@@ -61,6 +61,61 @@ int MenaBarrBot::evaluoTablero(const GameState &st, const Player & jug){
 	return misSemillas -  semillasContrario;
 }
 
+int MenaBarrBot::peso3(const GameState& st){
+	int h1,h2 = 0;
+	int misSemillas , semillasContrario;
+	Player contrario = J1;
+	Player yo = this->getPlayer();
+
+
+	if(yo == J1)
+		contrario = J2;
+	
+	misSemillas = semillasContrario = 0;
+
+	for(int i=0; i<=6; i++){
+		misSemillas += st.getSeedsAt(yo,(Position)i);
+		semillasContrario += st.getSeedsAt(contrario, (Position)i);
+	}
+
+	misSemillas*=10;
+	semillasContrario*=10;
+	
+	if(st.getWinner()==yo){
+		misSemillas+=500;
+	}
+	if(st.getWinner()==contrario){
+		semillasContrario+=500;
+	}
+	
+	h2 = misSemillas - semillasContrario;
+
+	return h2;
+}
+
+int MenaBarrBot::peso1(const GameState &st){
+	/*
+		H4: Maximize the amount of counters in a players own store.
+	 	This heuristic aims to pick a move that will maximize the amount of counters captured. 
+	 	It has a look ahead of one.
+	 */
+
+	int misSemillas , semillasContrario;
+	Player yo = (*this).getPlayer();
+	Player contrario = J1;
+
+	if(this->getPlayer() == J1)
+		contrario = J2;
+	
+	misSemillas = semillasContrario = 0;
+
+	misSemillas = st.getScore(yo);
+	semillasContrario = st.getScore(contrario);
+
+	return misSemillas - semillasContrario;
+
+}
+
 
 int MenaBarrBot::peso(const GameState &st){
 	Player player = this->getPlayer();
@@ -148,7 +203,7 @@ int MenaBarrBot::podaAlfaBeta(const GameState &estado, int limite, const Player 
 	}
 	else{
 		//return evaluoTablero(estado,this->getPlayer());
-		return peso(estado);
+		return peso3(estado);
 	}
 }
 

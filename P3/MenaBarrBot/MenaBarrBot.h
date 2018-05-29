@@ -22,6 +22,8 @@ public:
 	Move Minimax(const GameState &estado, int limite, const Player & j, int & valor );
 	int podaAlfaBeta(const GameState &estado, int limite, const Player & j, Move & mov, int alpha, int beta, int);
 	int peso(const GameState &st);
+	int peso1(const GameState &st);
+	int peso3(const GameState &st);
 
 
 
