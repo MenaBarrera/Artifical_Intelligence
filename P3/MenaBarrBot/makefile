@@ -1,6 +1,6 @@
 
 all:
-	g++ -o MenaOtraHeuristic3 *.cpp -I./ -lm -std=c++11 -Wall
+	g++ -o MenaBarrBot *.cpp -I./ -lm -std=c++11 -Wall
 
 
 clean:
