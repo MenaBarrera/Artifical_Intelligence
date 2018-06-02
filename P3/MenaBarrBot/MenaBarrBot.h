@@ -11,6 +11,8 @@
 #define MANUPCBOT_H_
 
 class MenaBarrBot:Bot {
+private:
+	Player contrario;
 public:
 	MenaBarrBot();
 	~MenaBarrBot();

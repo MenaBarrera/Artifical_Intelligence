@@ -28,6 +28,7 @@ MenaBarrBot::~MenaBarrBot() {
 
 void MenaBarrBot::initialize() {
 	// Inicializar el bot antes de jugar una partida
+	
 }
 
 string MenaBarrBot::getName() {
@@ -47,12 +48,11 @@ string mostrarJugador(const Player & p) {
 
 
 int MenaBarrBot::peso3(const GameState& st){
-	
+	contrario = (this->getPlayer()==J1) ? J2 : J1;
+
 	int mias =0 ;int otro = 0;
-	Player contrario;
 	Player yo = this->getPlayer();
 
-	yo==J1 ? contrario=J2:contrario=J1;
 
 	mias += st.getSeedsAt(yo,(Position)0);
 	mias += st.getSeedsAt(yo,(Position)1);
@@ -80,7 +80,6 @@ int MenaBarrBot::peso3(const GameState& st){
 	}
 	
 	return  mias - otro;
-
 	
 }
 
@@ -145,7 +144,7 @@ int MenaBarrBot::podaAlfaBeta(int limit,const GameState &status, Move & mov, con
 	// si la prof es <0 entonces -> sin profundidad
 	//
 
-	if ( (limit > 0 || limit <= -1) && !status.isFinalState()){
+	if (limit > 0 && !status.isFinalState()){
 
 		if(j == getPlayer() ){   
 			// estamos en un nodo max -> vamos a maximizar
@@ -223,7 +222,7 @@ Move MenaBarrBot::nextMove(const vector<Move> &adversary, const GameState &state
 	int a = numeric_limits<int>::min();
 	int b = numeric_limits<int>::max();
 
-	v = podaAlfaBeta(9, state,movimiento, turno ,a,b, 0);
+	v = podaAlfaBeta(12, state,movimiento, turno ,a,b, 0);
 
 	return movimiento;
 }
