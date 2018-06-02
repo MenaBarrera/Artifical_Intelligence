@@ -60,6 +60,7 @@ int MenaBarrBot::peso3(const GameState& st){
 	mias += st.getSeedsAt(yo,(Position)3);
 	mias += st.getSeedsAt(yo,(Position)4);
 	mias += st.getSeedsAt(yo,(Position)5);
+	mias += st.getSeedsAt(yo,(Position)6);
 	
 	otro += st.getSeedsAt(contrario,(Position)0);
 	otro += st.getSeedsAt(contrario,(Position)1);
@@ -67,21 +68,24 @@ int MenaBarrBot::peso3(const GameState& st){
 	otro += st.getSeedsAt(contrario,(Position)3);
 	otro += st.getSeedsAt(contrario,(Position)4);
 	otro += st.getSeedsAt(contrario,(Position)5);
+	otro += st.getSeedsAt(contrario,(Position)6);
 	
 
 	mias*=10;
 	otro*=10;
 	
 	if(st.getWinner()==yo){
-		mias+=500;
+		mias+=20;
 	}
 	if(st.getWinner()==contrario){
-		otro+=500;
+		otro+=20;
 	}
 	
 	return  mias - otro;
 	
 }
+
+
 
 int MenaBarrBot::peso1(const GameState &st){
 	/*
@@ -94,6 +98,8 @@ int MenaBarrBot::peso1(const GameState &st){
 	Player yo = (*this).getPlayer();
 	Player contrario = J1;
 
+	int p = peso3(st);
+
 	if(this->getPlayer() == J1)
 		contrario = J2;
 	
@@ -101,21 +107,33 @@ int MenaBarrBot::peso1(const GameState &st){
 
 	g1 = st.getScore(yo);
 	g2 = st.getScore(contrario);
+	int opponent_win_short_by = 24 - g2;
 
-	return g1 - g2;
+	
+	
+	return (g1 - g2 + opponent_win_short_by) ;
 
 }
 
 int MenaBarrBot::pesoMaxmov(GameState st){
-	int maximo=0;
+	contrario = (this->getPlayer()==J1) ? J2 : J1;
+	Player yo = this->getPlayer();
+	int semillas_yo = 0;
+	int semillas_contrario = 0 ;
+	int mi_granero = st.getScore(yo) * 3.45;
+	int su_granero = st.getScore(contrario) * 3.45;
 
-	for(int i=1; i<7; i++){
-		max(maximo,(int)st.getSeedsAt(this->getPlayer(),(Position)i)) ;
+	for (int i = 1; i<=6; i++){
+		semillas_yo += st.getSeedsAt(yo,(Position)i);
+		semillas_contrario += st.getSeedsAt(contrario,(Position)i);
 	}
+	semillas_yo *= 0.45;
+	semillas_contrario *= 0.45;
 
-	return maximo;
-
+	return (semillas_yo + mi_granero) - (su_granero + semillas_contrario);
+	
 }
+	
 
 
 
