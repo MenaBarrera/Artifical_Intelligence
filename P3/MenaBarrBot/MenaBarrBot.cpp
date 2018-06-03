@@ -2,7 +2,7 @@
  * MenaBarrBot.cpp
  *
  *  Created on: 2 JUN. 2018
- *      Author: MenaBarr
+ *      Author: Miguel Angel Mena Barrera
  */
 
 #include "MenaBarrBot.h"
@@ -86,33 +86,23 @@ int MenaBarrBot::peso3(const GameState& st){
 }
 
 
-
 int MenaBarrBot::peso1(const GameState &st){
-	/*
-		H4: Maximize the amount of counters in a players own store.
-	 	This heuristic aims to pick a move that will maximize the amount of counters captured. 
-	 	It has a look ahead of one.
-	 */
-
-	int g1 , g2;
-	Player yo = (*this).getPlayer();
-	Player contrario = J1;
-
-	int p = peso3(st);
-
-	if(this->getPlayer() == J1)
-		contrario = J2;
 	
+	int g1 , g2;
+
+	Player yo = (*this).getPlayer();
+	contrario = (this->getPlayer()==J1) ? J2 : J1;
+
+
 	g1 = g2 = 0;
 
 	g1 = st.getScore(yo);
 	g2 = st.getScore(contrario);
-	int opponent_win_short_by = 24 - g2;
+	int lo_que_falta_oponente = 24 - g2;
 
 	
-	
-	return (g1 - g2 + opponent_win_short_by) ;
 
+	return (g1 - g2 + lo_que_falta_oponente) ;
 }
 
 int MenaBarrBot::pesoMaxmov(GameState st){
@@ -134,9 +124,9 @@ int MenaBarrBot::pesoMaxmov(GameState st){
 	
 }
 	
-
-
-
+//
+// Funcion auxiliar que ayuda a la depuracion
+//
 string desplazar(int nivel) {
 	string r;
 	for(int i = 0; i < nivel; i++) {
@@ -148,51 +138,58 @@ string desplazar(int nivel) {
 	return r;
 }
 
-int MenaBarrBot::podaAlfaBeta(int limit,const GameState &status, Move & mov, const Player & j,  int alpha, int beta, int contador){
+/////////////////////////
+//
+//	Este codigo se ha diseñado partiendo del siguiente pseucodigo
+//	https://es.wikipedia.org/wiki/Poda_alfa-beta
+//
+/////////////////////////
 
-	int valor;
-	Move m_aux;
-
+int MenaBarrBot::podaAlfaBeta(int limit,const GameState &status, Move & move, const Player & pla,  int alpha, int beta, int contador){
+	int v;
 	// cerr << desplazar(2-limit) << "A&B (" << contador << ") = " << mostrarJugador(j) << ", " << mostrarJugador(getPlayer()) << "(getPlayer)" << endl;
 
-
+	///////////////////////////////////////////////////////////////
 	//
 	// si es status final devuelvo el valor heristico
 	// o si he llegado a la profundidad que se me ha indicado
-	// si la prof es <0 entonces -> sin profundidad
 	//
+	//////////////////////////////////////////////////////////////
+
+	Move movimientoRec;
 
 	if (limit > 0 && !status.isFinalState()){
 
-		if(j == getPlayer() ){   
+		if(pla == getPlayer() ){   
 			// estamos en un nodo max -> vamos a maximizar
+
 			// cerr << desplazar(2-limit) << "MAX || >>" << endl;
-			for(int i = 1; i < 7; i++){
+			for(int i = 1; i <= 6; i++){
 				// recorremos cada uno de los semilleros
 
 				// cerr << desplazar(2-limit) << " Posicion=" << i << " tiene en granero " << (int)status.getSeedsAt(j,(Position)i) << endl;
-				if(status.getSeedsAt(j,(Position)i) > 0){
+				if(status.getSeedsAt(pla,(Position)i) > 0){
 					// si hay semillas -> se simula el status
-
 					// cerr << desplazar(2-limit) << " ACEPTADO" << endl;
+					
 					GameState next_st = status.simulateMove((Move)i);
 
-					valor = podaAlfaBeta(limit-1,next_st,m_aux,next_st.getCurrentPlayer(),alpha,beta, contador+1);
+					v = podaAlfaBeta(limit-1,next_st,movimientoRec,next_st.getCurrentPlayer(),alpha,beta, contador+1);
 
-
-					if(alpha < valor){
-						mov = (Move)i;
-						alpha = valor;
+					// maximo entre alfa y valor anterior
+					if(alpha < v){
+						move = (Move)i;
+						alpha = v;
 						// cerr << desplazar(2-limit) << " |||| SELECCIONADO " << i << " |||" << endl;
 					}
 					
 					if(beta <= alpha) { //poda
-						// cerr << desplazar(2-limit) << "MAX || << (PODADO) " << mov << endl;
+						// cerr << desplazar(2-limit) << "MAX || << (PODADO) " << move << endl;
 						return beta;
 					}
 				}
 			}
-			// cerr << desplazar(2-limit) << "MAX || << " << mov << endl;
+			// cerr << desplazar(2-limit) << "MAX || << " << move << endl;
 			return alpha;
 		}
 		else{
@@ -201,30 +198,30 @@ int MenaBarrBot::podaAlfaBeta(int limit,const GameState &status, Move & mov, con
 			// cerr << desplazar(2-limit) << " Posicion=" << i << " tiene en granero " << (int)status.getSeedsAt(j,(Position)i) << endl;
 			// cerr << desplazar(2-limit) << " ACEPTADO" << endl;
 			GameState next_st =  status.simulateMove((Move)i);
-			valor = podaAlfaBeta(limit-1,next_st,m_aux,next_st.getCurrentPlayer(),alpha,beta, contador+1);
+			v = podaAlfaBeta(limit-1,next_st,movimientoRec,next_st.getCurrentPlayer(),alpha,beta, contador+1);
 
 
-			if(beta > valor){
-				mov  = (Move)i;
-				beta = valor;
+			if(beta > v){
+				move  = (Move)i;
+				beta = v;
 			}
 
 			if ( beta <= alpha){ // poda
-				// cerr << desplazar(2-limit) << "MIN || << (PODADO) " << mov << endl;
+				// cerr << desplazar(2-limit) << "MIN || << (PODADO) " << move << endl;
 				return alpha;
 				//
 			}
 			//}
 
 		}
-			// cerr << desplazar(2-limit) << "MIN || << " << mov << endl;
+			// cerr << desplazar(2-limit) << "MIN || << " << move << endl;
 			return beta;
 			//
 		}
 	}
 	else{
 		//evaluio nodo final 
-		return peso3(status);
+		return peso1(status);
 	}
 }
 
