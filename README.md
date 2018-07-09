@@ -1,8 +1,8 @@
-# Project Title
+# Inteligencia Artificial
 
-Inteligencia Artificial UGR 2017/2018
+2º GII Univ.Granada 2017-2018
 
 
 ## Authors
 
-* **MenaBarrera** - *UGR* - [MenaBarrera](https://github.com/MenaBarrera)
+* **Miguel Angel Mena** - *--* - [MenaBarrera](https://github.com/MenaBarrera)
