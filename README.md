@@ -5,4 +5,4 @@
 
 ## Authors
 
-* **Miguel Angel Mena** - *--* - [MenaBarrera](https://github.com/MenaBarrera)
+* **Miguel Angel Mena** - *GitHub* - [MenaBarrera](https://github.com/MenaBarrera)
